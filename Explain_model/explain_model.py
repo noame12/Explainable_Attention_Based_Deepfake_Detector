@@ -75,7 +75,7 @@ MODELS_PATH = os.path.join(BASE_DIR, "models1")
 EXAMPLES_DIR = 'examples'
 
 # Initialize the Efficientnet_ViT Deepfake Detector pretrained model
-config = 'baselines/EfficientViT/explained_architecture1.yaml'
+config = 'baselines/EfficientViT/explained_architecture.yaml'
 with open(config, 'r') as ymlfile:
     config = yaml.safe_load(ymlfile)
 model_weights = os.path.join(MODELS_PATH,'efficientnetB0_checkpoint72_All') #TODO: update with the latest model
