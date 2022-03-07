@@ -1,0 +1,24 @@
+import os
+from shutil import copyfile
+import csv
+
+file_name = 'test_summary_All601_final.csv'
+destination_path = "/home/eshel_noam/Explainable_Efficient_ViT_DFD/Explain_model/examples"
+
+with open(file_name) as csv_file: #TODO: verify the right file name
+    csv_reader = csv.DictReader(csv_file, delimiter=',')
+    line_count = 0
+
+    for row in csv_reader:
+        if line_count==0:
+            line_count += 1
+
+        else:
+            src_file = os.path.join(row["video_name"],row["high_low_frame_path"])
+            y = src_file.split('/')
+            video_name = y[-2]
+            method_name = y[-3]
+            img_file_name = method_name +'_' + video_name + '_' + row["high_low_frame_path"]
+            dst_name = os.path.join(destination_path,img_file_name )
+            copyfile(src_file,dst_name)
+            line_count += 1

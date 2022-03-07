@@ -1,0 +1,7 @@
+video_name,label,video_prob,high_low_prob,example_file_name
+../deep_fakes_explain/dataset/validation_set/Face2Face/050_059,1,0.99708027,0.99988496,Face2Face_050_059_643_0.png
+../deep_fakes_explain/dataset/validation_set/Face2Face/060_088,1,0.8478816,0.67715716,Face2Face_060_088_216_0.png
+../deep_fakes_explain/dataset/validation_set/FaceShifter/082_103,1,0.9784891,0.99989486,FaceShifter_082_103_296_0.png
+../deep_fakes_explain/dataset/validation_set/FaceSwap/266_252,1,0.9841486,0.9999399,FaceSwap_266_252_144_0.png
+../deep_fakes_explain/dataset/validation_set/NeuralTextures/082_103,1,0.5485439,0.0924083,NeuralTextures_082_103_104_0.png
+../deep_fakes_explain/dataset/validation_set/Deepfakes/098_092,1,0.999893,0.9999486,Deepfakes_098_092_277_0.png
