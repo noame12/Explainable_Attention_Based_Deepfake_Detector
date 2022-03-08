@@ -11,13 +11,13 @@ In addition, the project enables to re-train and test the model performence and 
 git clone https://github.com/noame12/Explainable_Attention_Based_Deepfake_Detector.git
 cd Explainable_Attention_Based_Deepfake_Detector
 ```
-- [ ] Setup Python environment using conda:
+- [ ] Setup Python environment using Conda:
 ```
 conda env create --file environment.yml
 conda activate explain_deepfakes
 export PYTHONPATH=.
 ```
-## Run the Explanation Process on the Deepfake Detection model
+## Run the Explanation process on the deepfake detection model
 **System requirements:**
 To run the explanability process on more than 5 face images, a machine with Tesla T4 (or stronger) GPU is required. 
 
@@ -30,7 +30,7 @@ cd  explain_model
 ```
 mkdir examples
 ```
-- [ ] Download the face images from the [samples](https://drive.google.com/drive/folders/1-JtWGMyd7YaTa56R6uYpjvwmUyW5q-zN?usp=sharing) drive into the newly created local 'examples' directory.
+- [ ] Download the face images from the [samples](https://drive.google.com/drive/folders/1-JtWGMyd7YaTa56R6uYpjvwmUyW5q-zN?usp=sharing) drive into the newly created local _'examples'_ directory.
 
 The samples drive contains 600 samples of face image extractions from 600 test videos. It consists of 100 images for each of the five deepfake methods – Face2Face, FaceShift, FaceSwap, NeuralTextures and Deepfakes, as well as 100 untouched real (aka Original) face images.
 
