@@ -108,7 +108,7 @@ def generate_visualization(original_image):
     return vis
 
 
-with open('test_summary_examples_test7.csv') as csv_file: #TODO: verify the right file name
+with open('test_summary_All600_examples.csv') as csv_file: #TODO: verify the right file name
     csv_reader = csv.DictReader(csv_file, delimiter=',')
     line_count = 0
     image_filenames_list =[]

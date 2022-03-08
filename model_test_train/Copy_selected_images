@@ -3,7 +3,7 @@ from shutil import copyfile
 import csv
 
 file_name = 'test_summary_All601_final.csv'
-destination_path = "/home/eshel_noam/Explainable_Efficient_ViT_DFD/Explain_model/examples"
+destination_path = "/home/eshel_noam/Explainable_Efficient_ViT_DFD/explain_model/examples"
 
 with open(file_name) as csv_file: #TODO: verify the right file name
     csv_reader = csv.DictReader(csv_file, delimiter=',')
