@@ -41,7 +41,7 @@ DATA_DIR = os.path.join(BASE_DIR, "dataset")
 TRAINING_DIR = os.path.join(DATA_DIR, "training_set")
 VALIDATION_DIR = os.path.join(DATA_DIR, "validation_set")
 TEST_DIR = os.path.join(DATA_DIR, "test_set")
-MODELS_PATH = os.path.join(BASE_DIR, "models1")
+MODELS_PATH = os.path.join(BASE_DIR, "models")
 METADATA_PATH = os.path.join(BASE_DIR, "data/metadata")  # Folder containing all training metadata for DFDC dataset
 VALIDATION_LABELS_PATH = os.path.join(DATA_DIR, "dfdc_val_labels.csv")
 
