@@ -17,7 +17,7 @@ conda env create --file environment.yml
 conda activate explain_deepfakes
 export PYTHONPATH=.
 ```
-## Run the Explanation Visualization method on the Deepfake Detection model
+## Run the Explanation Process on the Deepfake Detection model
 **System requirements:**
 To run the explanability process on more than 5 face images, a machine with Tesla T4 (or stronger) GPU is required. 
 
