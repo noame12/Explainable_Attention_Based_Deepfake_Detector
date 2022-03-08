@@ -36,7 +36,7 @@ The samples drive contains 600 samples of face image extractions from 600 test v
 
 An exhaustive list of the face image files for running the explainability method is provided in [test_summary_All600_examples.csv](https://github.com/noame12/Explainable_Attention_Based_Deepfake_Detector/blob/master/Explain_model/test_summary_All600_examples.csv) file in the _'explain_model'_ directory. To run the test on a subset of the list, extract a customized list from the exhaustive list.
 
-**!Note:** Prior to running the _explain_model.py_ module, make sure to keep the same .csv file name or update the name in the _explain_model.py_ file (line 111).
+**!Note:** Make sure to keep the same .csv file name or update the name in the _explain_model.py_ file (line 111) prior to running the _explain_model.py_ module.
 
 - [ ] Run the explanation visualization process:
 ```
