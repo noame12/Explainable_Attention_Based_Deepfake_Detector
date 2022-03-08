@@ -71,8 +71,9 @@ def show_cam_on_image(img, mask):
 BASE_DIR = '../deep_fakes_explain/'
 DATA_DIR = os.path.join(BASE_DIR, "dataset")
 TEST_DIR = os.path.join(DATA_DIR, "validation_set")
-MODELS_PATH = os.path.join(BASE_DIR, "models1")
+MODELS_PATH = os.path.join(BASE_DIR, "models")
 EXAMPLES_DIR = 'examples'
+OUTPUT_DIR = 'explanation'
 
 # Initialize the Efficientnet_ViT Deepfake Detector pretrained model
 config = 'baselines/EfficientViT/explained_architecture.yaml'
@@ -84,6 +85,10 @@ model = EfficientViT(config=config, channels=1280, selected_efficient_net=0)
 model.load_state_dict(torch.load(model_weights))
 model.eval()
 model = model.cuda()
+
+if not os.path.exists(OUTPUT_DIR):
+    os.makedirs(OUTPUT_DIR)
+
 down_sample= AvgPool2d(kernel_size=2)
 
 def generate_visualization(original_image):
@@ -156,7 +161,7 @@ for i, file_name in enumerate(image_filenames_list):
 
     plt.suptitle(Title,ha='left', size='medium', x=0.4, y=0.92)
 
-    fig.savefig('samples/vis_' + image_filenames_list[i])
+    fig.savefig(OUTPUT_DIR +'/vis_' + image_filenames_list[i])
     plt.close(fig)
 
 
