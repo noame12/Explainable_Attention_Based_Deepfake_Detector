@@ -1,5 +1,5 @@
 # Explainable Attention Based Deepfake Detector
-The Project consist of a Video Deepfake detector based on hybrid EfficientNet CNN and Vision Transformer architecture. The model inference results can be analyzed and explained by rendering a heatmap visualization based on a Relevancy map calculated from the Attention map(s) of the Transformer, overlayed on the input face image.
+The project consist a Video Deepfake detector based on hybrid EfficientNet CNN and Vision Transformer architecture. The model inference results can be analyzed and explained by rendering a (heatmap) visualization based on a Relevancy map calculated from the Attention layers of the Transformer, overlayed on the input face image.
 
 ![Explainable Attention Based Deepfake Detector](https://user-images.githubusercontent.com/93251301/157253542-47192d3e-c7f7-4aa0-bbd2-039738d8fba3.png)
 
