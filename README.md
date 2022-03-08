@@ -3,7 +3,7 @@ The project consist a Video Deepfake detector based on hybrid EfficientNet CNN a
 
 ![Explainable Attention Based Deepfake Detector](https://user-images.githubusercontent.com/93251301/157253542-47192d3e-c7f7-4aa0-bbd2-039738d8fba3.png)
 
-In addition, the project code enables to re-train and test the model with new parameters.
+In addition, the project enables to re-train and test the model performence and explainability with new parameters.
 
 ## How to Install  
 - [ ] Clone the repository and move into it:
