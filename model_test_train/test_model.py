@@ -140,7 +140,7 @@ if __name__ == "__main__":
     parser.add_argument('--model_path', default='', type=str, metavar='PATH',
                         help='Path to model checkpoint (default: none).')
     parser.add_argument('--dataset', type=str, default='All',
-                        help="Which dataset to use (Deepfakes|Face2Face|FaceShifter|FaceSwap|NeuralTexture|DFDC)")
+                        help="Which dataset to use (Deepfakes|Face2Face|FaceShifter|FaceSwap|NeuralTexture|All)")
     parser.add_argument('--max_videos', type=int, default=-1, 
                         help="Maximum number of videos to use for training (default: all).")
     parser.add_argument('--config', type=str, 
@@ -150,7 +150,7 @@ if __name__ == "__main__":
     parser.add_argument('--frames_per_video', type=int, default=20,
                         help="How many equidistant frames for each video (default: 20)")
     parser.add_argument('--batch_size', type=int, default=12,
-                        help="Batch size (default: 32)") #Todo: I canged the default value to 1
+                        help="Batch size (default: 12)") #Todo: I canged the default value to 1
     
     opt = parser.parse_args()
     print(opt)
