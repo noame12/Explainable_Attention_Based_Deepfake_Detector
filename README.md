@@ -135,7 +135,7 @@ cd model_test_train
 ```
 python test_model.py --model_path deep_fakes_explain/models/efficientnetB0_checkpoint72_All --config configs/explained_architecture.yaml
 ```
-By default the command will test on All datasets but you can customize the following parameters for both the architectures:
+By default, the command will test on All datasets but you can customize the following parameters:
 - --dataset: Which dataset to use (Deepfakes|Face2Face|FaceShifter|FaceSwap|NeuralTextures|All)
 - --workers: Number of data loader workers (default: 16)
 - --frames_per_video: Number of equidistant frames for each video (default: 20)
