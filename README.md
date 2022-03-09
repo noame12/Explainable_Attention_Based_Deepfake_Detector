@@ -70,10 +70,10 @@ To run the test process, a machine with two Tesla T4 (or stronger) GPUs is requi
 - [ ] Download and extract the dataset:
 [FaceForensic++](https://github.com/ondyari/FaceForensics/blob/master/dataset/)
 
-The videos should be downloaded under /deep_fakes_exaplain/dataset directory.
+The videos should be downloaded under _'/deep_fakes_exaplain/dataset'_ directory.
 
 ### Preprocess the data
-To perform deepfake detection it is necessary to first identify and extract faces from all the videos in the dataset.
+To perform deepfake detection it is first necessary to identify and extract the faces from all the videos in the dataset.
 
 - [ ] Detect the faces inside the videos:
 ```
@@ -131,7 +131,7 @@ Each (fake) method directory contain directories for all videos. Each video dire
 ```
 cd model_test_train
 ```
-Then, run the following command for evaluating the deepfake detector model giving the pre-trained model path and the configuration file available in the config directory:
+- [ ] Run the following command for evaluating the deepfake detector model providing the pre-trained model path and the configuration file available in the config directory:
 ```
 python test_model.py --model_path deep_fakes_explain/models/efficientnetB0_checkpoint72_All --config configs/explained_architecture.yaml
 ```
