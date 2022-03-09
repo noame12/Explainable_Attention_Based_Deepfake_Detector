@@ -69,7 +69,8 @@ To run the test process, a machine with two Tesla T4 (or stronger) GPUs is requi
 ### Get the data
 - [ ] Download and extract the dataset:
 [FaceForensic++](https://github.com/ondyari/FaceForensics/blob/master/dataset/)
-The videos should be downloaded under /deep_fakes_exaplain/dataset.
+
+The videos should be downloaded under /deep_fakes_exaplain/dataset directory.
 
 ### Preprocess the data
 To perform deepfake detection it is necessary to first identify and extract faces from all the videos in the dataset.
