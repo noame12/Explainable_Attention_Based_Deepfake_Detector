@@ -53,7 +53,7 @@ The results of the explanability process run on all examples in advance can be s
 
 ## Test the deepfake detection model
 The test module enables to test the performance of the deepfake detector. 
-The input of the model is the test/ verification dataset of face images extracted from the fake and real video sequences. 
+The input data to the model is the test (or verification) dataset of face images extracted from the fake and real video sequences. 
 The test process generates four outputs:
 -	Accuracy, AUC (Area Under Curve) and F1 scores of the classifier
 -	ROC diagram
