@@ -49,3 +49,98 @@ The output of the explanation process can be viewed in the _‘explanation’_ d
 
 The results of the explanability process run on all examples in advance can be seen in the [visualization results drive](https://drive.google.com/drive/folders/1fxi-ilXykkq-RXwbNRtrwdicxKROrHae?usp=sharing) .
 
+
+
+## Test the deepfake detection model
+The test module enables to test the performance of the deepfake detector. 
+The input of the model is the test/ verification dataset of face images extracted from the fake and real video sequences. 
+The test process generates four outputs:
+-	Accuracy, AUC (Area Under Curve) and F1 scores of the classifier
+-	ROC diagram
+-	A .txt file with the classification results for each video sequence
+-	A .csv list of face image files – one sample per each video.
+
+**System requirements:**
+To run the test process, a machine with two Tesla T4 (or stronger) GPUs is required. 
+
+
+![Data flow](https://user-images.githubusercontent.com/93251301/157474640-5a6d5237-297d-42df-a7b3-0de615ff3a64.png)
+
+### Get the data
+- [ ] Download and extract the dataset:
+[FaceForensic++](https://github.com/ondyari/FaceForensics/blob/master/dataset/)
+The videos should be downloaded under /deep_fakes_exaplain/dataset.
+
+### Preprocess the data
+To perform deepfake detection it is necessary to first identify and extract faces from all the videos in the dataset.
+
+- [ ] Detect the faces inside the videos:
+```
+cd preprocessing
+```
+```
+python detect_faces.py --data_path /deep_fakes_exaplain/dataset --dataset: FACEFORENSICS
+```
+**!Note:** The default dataset for the detect_faces.py module is DFDC, therefore it is important to specify the --dataset parameter as described above.
+
+The detected face boxes (coordinates) will be saved inside the "/deep_fakes_exaplain/dataset/boxes" folder.
+![image](https://user-images.githubusercontent.com/93251301/157497703-050bf9c2-4962-49fe-b559-44f1ac3ab04e.png)
+
+
+- [ ] Extract the detected faces obtaining the images:
+```
+python extract_crops.py --data_path deep_fakes_explain/dataset --output_path deep_fakes_explain/dataset/training_set
+--dataset FACEFORENSIC
+```
+Repeat detection and extraction for all the different parts of your dataset. The --output_path parameter above is set to the training_set directory. You should repeat the process also for the validation_set and test_set directories.
+The folders’ structure should look as follows: 
+![image](https://user-images.githubusercontent.com/93251301/157499273-4c171cad-7163-4209-b7ac-e8d968cffa41.png)
+
+Each (fake) method directory contain directories for all videos. Each video directory contain all face extraction files, for that video, in .png format.
+
+```
+    - training_set
+        - Deepfakes
+            - video_name_0
+                0_0.png
+                1_0.png
+                ...
+                N_0.png
+            ...
+            - video_name_K
+                0_0.png
+                1_0.png
+                ...
+                M_0.png
+        - Face2Face
+        - FaceShifter
+        - FaceSwap
+        - NeuralTextures
+        - Original
+    - validation_set
+        ...
+            ...
+                ...
+    - test_set
+        ...
+            ...
+```
+### Test the model
+- [ ] Move into the test module folder:
+```
+cd model_test_train
+```
+Then, run the following command for evaluating the deepfake detector model giving the pre-trained model path and the configuration file available in the config directory:
+```
+python test_model.py --model_path deep_fakes_explain/models/efficientnetB0_checkpoint72_All --config configs/explained_architecture.yaml
+```
+By default the command will test on All datasets but you can customize the following parameters for both the architectures:
+- --dataset: Which dataset to use (Deepfakes|Face2Face|FaceShifter|FaceSwap|NeuralTextures|All)
+- --workers: Number of data loader workers (default: 16)
+- --frames_per_video: Number of equidistant frames for each video (default: 20)
+- --batch_size: Prediction Batch Size (default: 12)
+
+
+
+
+
