@@ -191,7 +191,7 @@ if __name__ == "__main__":
         folders = ["Original", "Face2Face", "FaceShifter", "FaceSwap", "NeuralTextures", "Deepfakes"]
 
     else:
-        folders = [opt.dataset]
+        folders = [opt.dataset, "Original"]
 
     for folder in folders:
         method_folder = os.path.join(TEST_DIR, folder)  
@@ -216,6 +216,8 @@ if __name__ == "__main__":
     bar = Bar('Predicting \n', max=len(videos))
 
     f = open(opt.dataset + "_" + model_name + "_labels.txt", "w+")
+
+    # f = open(os.path.dirname(OUTPUT_DIR)+ opt.dataset + "_" + model_name + "_labels.txt", "w+")
 
     max_min_probs = []
     max_min_images = []
@@ -284,7 +286,7 @@ if __name__ == "__main__":
 
 
     # csv header
-    header = ['video_name', 'label', 'video_prob', 'high_low_prob', 'high_low_frame_path']
+    header = ['video_name', 'label', 'video_prob', 'high_low_prob', 'example_file_name']
     summary = np.asarray(video_names.reshape(len(video_names),-1))
     summary = np.append(summary,correct_test_labels.reshape(len(correct_test_labels),-1), axis=1)
     summary = np.append(summary,preds, axis=1)
@@ -308,10 +310,9 @@ if __name__ == "__main__":
 
     loss = loss_fn(tensor_preds, tensor_labels).numpy()
 
-    #accuracy = accuracy_score(np.asarray(preds).round(), correct_test_labels)
     accuracy = accuracy_score(custom_round(np.asarray(preds)), correct_test_labels)
 
     f1 = f1_score(correct_test_labels, custom_round(np.asarray(preds)))
     print(model_name, "Test Accuracy:", accuracy, "Loss:", loss,  "F1", f1)
     save_roc_curves(correct_test_labels, preds, model_name, accuracy, loss, f1)
-    # print("Model AUC", model_auc)
+
