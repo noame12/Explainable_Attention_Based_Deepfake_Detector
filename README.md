@@ -61,7 +61,7 @@ The test process generates four outputs:
 -	A .csv list of face image files – one sample per each video.
 
 **System requirements:**
-To run the test process, a machine with two Tesla T4 (or stronger) GPUs is required. 
+To run the test process, a machine with **two** Tesla T4 (or stronger) GPUs is required. 
 
 
 ![Data flow](https://user-images.githubusercontent.com/93251301/157474640-5a6d5237-297d-42df-a7b3-0de615ff3a64.png)
