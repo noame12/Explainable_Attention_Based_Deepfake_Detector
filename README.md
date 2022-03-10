@@ -141,7 +141,7 @@ By default, the command will test on All datasets but you can customize the foll
 - --frames_per_video: Number of equidistant frames for each video (default: 20)
 - --batch_size: Prediction Batch Size (default: 12)
 
-
+The results of the test process are saved in the _'results/tests'_ directory.
 
 
 
