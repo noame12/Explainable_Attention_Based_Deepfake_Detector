@@ -166,13 +166,5 @@ By default the command will train on All method datasets but you can customize t
 - --patience: How many epochs wait before stopping for validation loss not improving (default: 5)
 
 ## Credits
-```
-@misc{coccomini2021combining,
-      title={Combining EfficientNet and Vision Transformers for Video Deepfake Detection}, 
-      author={Davide Coccomini and Nicola Messina and Claudio Gennaro and Fabrizio Falchi},
-      year={2021},
-      eprint={2107.02612},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
-}
-```
+- The Deepfake Detector implementation is based on the [Hybrid EfficientNet Vision Transformer](https://github.com/davide-coccomini/Combining-EfficientNet-and-Vision-Transformers-for-Video-Deepfake-Detection) implementation.
+- The explainability method is based on the  [Transformer MM Explainability](https://github.com/hila-chefer/Transformer-MM-Explainability) implementation.
