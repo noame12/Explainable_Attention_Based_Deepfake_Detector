@@ -165,4 +165,14 @@ By default the command will train on All method datasets but you can customize t
 - --max_videos: Maximum number of videos to use for training (default: all)
 - --patience: How many epochs wait before stopping for validation loss not improving (default: 5)
 
-
+## Credits
+```
+@misc{coccomini2021combining,
+      title={Combining EfficientNet and Vision Transformers for Video Deepfake Detection}, 
+      author={Davide Coccomini and Nicola Messina and Claudio Gennaro and Fabrizio Falchi},
+      year={2021},
+      eprint={2107.02612},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
