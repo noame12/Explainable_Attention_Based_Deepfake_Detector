@@ -143,5 +143,26 @@ By default, the command will test on All datasets but you can customize the foll
 
 The results of the test process are saved in the _'results/tests'_ directory.
 
+## Train the model
+The train module enables to re-train the model with different parameters. Re-training may be desired for verifying or testing any thesis for improving model performance or explainability.
+
+To evaluate a customized model trained from scratch with a different architecture, you need to edit the configs/explained_architecture.yaml file.
+
+**System requirements:**
+A machine with **two** Tesla T4 (or stronger) GPUs, CPU with 16 vCPUs and 100G RAM.
+
+To train the model using my architecture configuration:
+- [ ] Verify that you are in _‘model_test_train’_ directory
+- [ ] Run the train module
+```
+python train_model.py --config configs/explained_architecture.yaml
+```
+By default the command will train on All method datasets but you can customize the following parameters:
+- --num_epochs: Number of training epochs (default: 100)
+- --workers: Number of data loader workers (default: 16)
+- --resume: Path to latest checkpoint (default: none)
+- --dataset: Which dataset to use (Deepfakes|Face2Face|FaceShifter|FaceSwap|NeuralTextures|All) (default: All)
+- --max_videos: Maximum number of videos to use for training (default: all)
+- --patience: How many epochs wait before stopping for validation loss not improving (default: 5)
 
 
