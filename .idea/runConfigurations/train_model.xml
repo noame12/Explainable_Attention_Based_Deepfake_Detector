@@ -1,19 +1,19 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="test_model" type="PythonConfigurationType" factoryName="Python">
+  <configuration default="false" name="train_model" type="PythonConfigurationType" factoryName="Python">
     <module name="Explainable_Efficient_ ViT_DFD" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
     <envs>
       <env name="PYTHONUNBUFFERED" value="1" />
     </envs>
-    <option name="SDK_HOME" value="" />
+    <option name="SDK_HOME" value="sftp://eshel_noam@34.140.157.102:22/home/eshel_noam/miniconda3/envs/explain_deepfakes/bin/python" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/model_test_train" />
-    <option name="IS_MODULE_SDK" value="true" />
+    <option name="IS_MODULE_SDK" value="false" />
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model_test_train/test_model.py" />
-    <option name="PARAMETERS" value="--model_path /home/eshel_noam/Explainable_Efficient_ViT_DFD/deep_fakes_explain/models/efficientnetB0_checkpoint73_All --config /home/eshel_noam/Explainable_Efficient_ViT_DFD/model_test_train/configs/explained_architecture.yaml --dataset All" />
+    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model_test_train/train_model.py" />
+    <option name="PARAMETERS" value="--config /home/eshel_noam/Explainable_Efficient_ViT_DFD/model_test_train/configs/explained_architecture.yaml --resume /home/eshel_noam/Explainable_Efficient_ViT_DFD/deep_fakes_explain/models/efficientnetB0_checkpoint72_All" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />

@@ -12,7 +12,7 @@
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-    <option name="SCRIPT_NAME" value="C:\Users\eshel_hhhlobi\Documents\AI Studies\Courses\Deep Leraning\Final Project\code\Final Code\Explainable_Efficient_ ViT_DFD\model_test_train\train_model.py" />
+    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model_test_train/train_model.py" />
     <option name="PARAMETERS" value="--config /home/eshel_noam/Explainable_Efficient_ViT_DFD/model_test_train/configs/explained_architecture1.yaml --resume /home/eshel_noam/Explainable_Efficient_ViT_DFD/deep_fakes_explain/models1/efficientnetB0_checkpoint72_All" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />

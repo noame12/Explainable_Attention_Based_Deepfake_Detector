@@ -36,7 +36,7 @@ import yaml
 import argparse
 
 
-BASE_DIR = '../../deep_fakes_explain/'
+BASE_DIR = '../deep_fakes_explain/'
 DATA_DIR = os.path.join(BASE_DIR, "dataset")
 TRAINING_DIR = os.path.join(DATA_DIR, "training_set")
 VALIDATION_DIR = os.path.join(DATA_DIR, "validation_set")
