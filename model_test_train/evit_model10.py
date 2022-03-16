@@ -1,12 +1,9 @@
 import torch
-torch.cuda.empty_cache()
 from torch import nn
-import torch.optim as optim
 from einops import rearrange
 from efficientnet_pytorch import EfficientNet
 import cv2
 import re
-# from utils import resize
 import numpy as np
 from torch import einsum
 from random import randint
@@ -59,7 +56,10 @@ class Attention(nn.Module):
             nn.Dropout(dropout)
         ) if project_out else nn.Identity()
 
-        self.attn_gradients = None #TODO: Added lines 58 to 72
+#FIXME: the following methods (up to line 75) where added to enable tapping into the attention maps and gradients
+# for calculation of the Relevancy
+
+        self.attn_gradients = None
         self.attention_map = None
 
 
@@ -86,14 +86,15 @@ class Attention(nn.Module):
 
         out = einsum('b h i j, b h j d -> b h i d', attn, v)
 
-        self.save_attention_map(attn) #TODO: Added lines 85 to 87
+        self.save_attention_map(attn) #FIXME: Added to save attention gradients
         if register_hook:
             attn.register_hook(self.save_attn_gradients)
 
         out = rearrange(out, 'b h n d -> b n (h d)')
         return self.to_out(out)
 
-class Block(nn.Module): #FIXME - added a new class
+#FIXME: the Block calss was added to facilitate the model explaination
+class Block(nn.Module):
     def __init__(self, dim, heads, dim_head, drop_out, mlp_dim, norm_layer=nn.LayerNorm):
         super().__init__()
         self.norm1 = norm_layer(dim)
@@ -114,7 +115,7 @@ class Transformer(nn.Module):
         super().__init__()
 
         self.blocks =nn.ModuleList([Block(dim =dim, heads = heads, dim_head = dim_head, drop_out = dropout, mlp_dim=mlp_dim)
-                                    for i in range(depth)]) #FIXME added an alternatived definition of layers using blocks
+                                    for i in range(depth)]) #FIXME: an alternatived definition of layers using blocks
 
 
     #     self.layers = nn.ModuleList([])
@@ -170,14 +171,14 @@ class EfficientViT(nn.Module):
                     param.requires_grad = False
             
 
-        self.num_patches = (image_size // patch_size) ** 2 #Fixme: corrected the formula
+        self.num_patches = (image_size // patch_size) ** 2 #FIXME: corrected the formula
         patch_dim = channels * patch_size ** 2
         self.emb_dim = emb_dim
         self.patch_size = patch_size
         efficientnet_output_size = channels * patch_size ** 2
         self.pos_embedding = nn.Parameter(torch.randn(1, self.num_patches + 1, emb_dim))
-        # self.proj = nn.Linear(efficientnet_output_dim, self.num_patches) #Fixme - added by me
-        # self.proj = nn.Linear(efficientnet_output_size, self.num_patches*emb_dim) #Fixme - commented and added instead the Conv1 below
+        # FIXME: Change the patch_to_embedding from simple linear projection that degenerated the input to the transformer
+        #  to one token, to support 1024 tokens
         self.patch_to_embedding = nn.Conv1d(in_channels=1, out_channels=self.num_patches, kernel_size= dim, stride=dim)
         self.cls_token = nn.Parameter(torch.randn(1, 1, self.emb_dim))
         self.dropout = nn.Dropout(emb_dropout)
@@ -193,20 +194,11 @@ class EfficientViT(nn.Module):
     def forward(self, img, mask=None, register_hook=False):
         p = self.patch_size
         x = self.efficient_net.extract_features(img) # 1280x7x7
-        # x = x.reshape(1, 14, 14, -1) #Fixme - added toadaprt to the new patch size
-        #x = self.features(img)
 
-
-        #x2 = self.features(img)
         y = rearrange(x, 'b c (h p1) (w p2) -> b (h w) (p1 p2 c)', p1 = p, p2 = p)
-        #y2 = rearrange(x2, 'b c (h p1) (w p2) -> b (h w) (p1 p2 c)', p1 = p, p2 = p)
-        # y = self.proj(y) #Fixme added by me
-        # print (y.shape)
-        y = self.patch_to_embedding(y) #Fixme - changed the patch_to_embedding above
-        # print (y.shape)
-        cls_tokens = self.cls_token.expand(x.shape[0], -1, -1) # Fixme - commented by me
-        #cls_tokens = self.cls_token #Fixme - added by me
-        # print (cls_tokens.shape)
+        y = self.patch_to_embedding(y) #FIXME: changed the patch_to_embedding above
+
+        cls_tokens = self.cls_token.expand(x.shape[0], -1, -1) # FIXME: corrected to align with new patch embedding
         x = torch.cat((cls_tokens, y), 1)
         shape=x.shape[0]
         x += self.pos_embedding[0:shape]

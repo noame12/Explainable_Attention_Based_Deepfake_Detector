@@ -109,7 +109,7 @@ def read_frames(video_path, videos):
             
             frames_paths_dict[key] = frames_paths_dict[key][:opt.frames_per_video]
 
-        for key in frames_paths_dict:
+        for key in frames_paths_dict: #FIXME: to facilitate sampling frames for explaination
             selected_frames.append(frames_paths_dict[key])
 
 
@@ -150,7 +150,7 @@ if __name__ == "__main__":
     parser.add_argument('--frames_per_video', type=int, default=20,
                         help="How many equidistant frames for each video (default: 20)")
     parser.add_argument('--batch_size', type=int, default=12,
-                        help="Batch size (default: 12)") #Todo: I canged the default value to 1
+                        help="Batch size (default: 12)")
     
     opt = parser.parse_args()
     print(opt)
@@ -166,7 +166,7 @@ if __name__ == "__main__":
     if os.path.exists(opt.model_path):
         model = EfficientViT(config=config, channels=channels, selected_efficient_net = opt.efficient_net)
         model.load_state_dict(torch.load(opt.model_path))
-        parallel_net = nn.DataParallel(model, device_ids=[0,1]) #Fixme: parallel net added in
+        parallel_net = nn.DataParallel(model, device_ids=[0,1]) #FIXME: parallel net added to support training and testing on multiple GPUs
         parallel_net = parallel_net.to(0)
         parallel_net.eval()
         # model.eval()
@@ -205,7 +205,7 @@ if __name__ == "__main__":
 
     video_names = np.asarray([row[2] for row in videos]) # full path to videos
     correct_test_labels = np.asarray([row[1] for row in videos])
-    selected_frames = np.asarray([row[3] for row in videos])
+    selected_frames = np.asarray([row[3] for row in videos]) # FIXME: added to facilitate the image sampling for explanation
     videos = np.asarray([row[0] for row in videos]) # dictionary of images per video
 
     preds = []
@@ -238,7 +238,7 @@ if __name__ == "__main__":
                 faces = faces.float().to(0)
                 pred = parallel_net(faces)
                 
-                scaled_pred = []
+                scaled_pred = [] #FIXME: to collect pred score for each frame and use it to sample the highest/ lowest prob frame
                 for idx, p in enumerate(pred):
                     scaled_pred.append(torch.sigmoid(p))
                 faces_preds.extend(scaled_pred)
@@ -248,9 +248,9 @@ if __name__ == "__main__":
             f.write(" " + str(face_pred))
             video_faces_preds.append(face_pred)
 
-        # Following code samples face images for visualization - one image for each video.
-        # If video classified fake than sampling the frame with the highest prediction score.
-        # Otherwise, if video classified real,  sampling the frame with the lowest prediction score.
+        # FIXME: the following code samples face images for visualization - one image for each video.
+        #  If video classified fake than sampling the frame with the highest prediction score.
+        #  otherwise, if video classified real,  sampling the frame with the lowest prediction score.
 
         if max(video_faces_preds) > 0.55:
             video_faces_max_min = max(faces_preds)
@@ -285,7 +285,8 @@ if __name__ == "__main__":
     bar.finish()
 
 
-    # csv header
+    # FIXME: the following code creates a csv file listing all sampled frames and corresponding info
+    #  for running the explain process on these samples
     header = ['video_name', 'label', 'video_prob', 'high_low_prob', 'example_file_name']
     summary = np.asarray(video_names.reshape(len(video_names),-1))
     summary = np.append(summary,correct_test_labels.reshape(len(correct_test_labels),-1), axis=1)
@@ -294,7 +295,7 @@ if __name__ == "__main__":
     summary = np.append(summary,np.asarray(max_min_images).reshape(len(max_min_images),-1), axis=1)
 
 
-    with open('test_summary'+ '_' + opt.dataset + '.csv', 'w', encoding='UTF8', newline='') as out:
+    with open('samples_list'+ '_' + opt.dataset + '_' + model_name +'.csv', 'w', encoding='UTF8', newline='') as out:
         writer = csv.writer(out)
         writer.writerow(header)  # write the header
         writer.writerows(summary) # write multiple rows
