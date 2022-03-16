@@ -38,6 +38,10 @@ def generate_relevance(model, input):
 
     num_tokens = model.transformer.blocks[0].attn.get_attention_map().shape[-1]
     R = torch.eye(num_tokens, num_tokens).cuda()
+    # num_layers = 6
+    # for i, blk in enumerate(model.transformer.blocks):
+    #     if i <= num_layers:
+    #         continue
     for blk in model.transformer.blocks:
         grad = blk.attn.get_attn_gradients()
         # g_view = grad.cpu().numpy()
@@ -75,7 +79,7 @@ MODELS_PATH = os.path.join(BASE_DIR, "models")
 EXAMPLES_DIR = 'examples'
 OUTPUT_DIR = 'explanation'
 
-# Initialize the Efficientnet_ViT Deepfake Detector pretrained model
+# FIXME: Initialize the Efficientnet_ViT Deepfake Detector pretrained model
 config = 'baselines/EfficientViT/explained_architecture.yaml'
 with open(config, 'r') as ymlfile:
     config = yaml.safe_load(ymlfile)
@@ -107,8 +111,8 @@ def generate_visualization(original_image):
     vis = cv2.cvtColor(np.array(vis), cv2.COLOR_RGB2BGR)
     return vis
 
-
-with open('test_summary_All600_examples.csv') as csv_file: #TODO: verify the right file name
+#FIXME: added batch visulization based on the sameples file generated in the test
+with open('samples_list_few_efficientnetB0_checkpoint89_All_refac.csv') as csv_file: #TODO: verify the right file name
     csv_reader = csv.DictReader(csv_file, delimiter=',')
     line_count = 0
     image_filenames_list =[]
@@ -161,7 +165,7 @@ for i, file_name in enumerate(image_filenames_list):
 
     plt.suptitle(Title,ha='left', size='medium', x=0.4, y=0.92)
 
-    fig.savefig(OUTPUT_DIR +'/vis_' + image_filenames_list[i])
+    fig.savefig(OUTPUT_DIR +'/vis_norm' + image_filenames_list[i])
     plt.close(fig)
 
 
