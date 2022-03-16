@@ -79,7 +79,7 @@ OUTPUT_DIR = 'explanation'
 config = 'baselines/EfficientViT/explained_architecture.yaml'
 with open(config, 'r') as ymlfile:
     config = yaml.safe_load(ymlfile)
-model_weights = os.path.join(MODELS_PATH,'efficientnetB0_checkpoint72_All') #TODO: update with the latest model
+model_weights = os.path.join(MODELS_PATH,'efficientnetB0_checkpoint89_All') #TODO: update with the latest model
 
 model = EfficientViT(config=config, channels=1280, selected_efficient_net=0)
 model.load_state_dict(torch.load(model_weights))
