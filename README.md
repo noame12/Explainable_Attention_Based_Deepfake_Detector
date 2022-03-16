@@ -34,7 +34,7 @@ mkdir examples
 
 The samples drive contains 600 samples of face image extractions from 600 test videos. It consists of 100 images for each of the five deepfake methods – Face2Face, FaceShift, FaceSwap, NeuralTextures and Deepfakes, as well as 100 untouched real (aka Original) face images.
 
-An exhaustive list of the face image files for running the explainability method is provided in [test_summary_All600_examples.csv](https://github.com/noame12/Explainable_Attention_Based_Deepfake_Detector/blob/master/Explain_model/test_summary_All600_examples.csv) file in the _'explain_model'_ directory. To run the test on a subset of the list, extract a customized list from the exhaustive list.
+An exhaustive list of the face image files for running the explainability method is provided in [samples_list_All_efficientnetB0_checkpoint89_All_refac.csv](https://github.com/noame12/Explainable_Attention_Based_Deepfake_Detector/blob/master/explain_model/samples_list_All_efficientnetB0_checkpoint89_All_refac.csv) file in the _'explain_model'_ directory. To run the test on a subset of the list, extract a customized list from the exhaustive list.
 
 **!Note:** Make sure to keep the same .csv file name or update the name in the _explain_model.py_ file (line 111) prior to running the _explain_model.py_ module.
 
