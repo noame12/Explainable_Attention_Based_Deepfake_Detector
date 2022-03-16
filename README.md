@@ -133,7 +133,7 @@ cd model_test_train
 ```
 - [ ] Run the following command for evaluating the deepfake detector model providing the pre-trained model path and the configuration file available in the config directory:
 ```
-python test_model.py --model_path ../deep_fakes_explain/models/efficientnetB0_checkpoint72_All --config configs/explained_architecture.yaml
+python test_model.py --model_path ../deep_fakes_explain/models/efficientnetB0_checkpoint89_All --config configs/explained_architecture.yaml
 ```
 By default, the command will test on All datasets but you can customize the following parameters:
 - --dataset: Which dataset to use (Deepfakes|Face2Face|FaceShifter|FaceSwap|NeuralTextures|Original|All)
